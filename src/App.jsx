@@ -1,10 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
+import Account from './components/Account';
+import Bonus from './components/Bonus';
 function App() {
+  const [account, setAccount] = useState({ amount: 0 });
+  const [bonus, setBonus] = useState({ points: 0 });
+
+  const increment = () => {
+    setAccount({ amount: account.amount + 1 });
+  }
+  const incrementBonus = () =>{
+    setBonus({ points: bonus.points + 1 });
+  }
+  const decrement = () => {
+    setAccount({ amount: account.amount - 1 });
+  }
+
+  const incrementByAmount = (value) => {
+    setAccount({ amount: account.amount + value });
+  }
   return (
-    <>
-      <h1>Vite + React</h1>      
-    </>
+    <div className='App'>
+      <h4>App</h4>
+      <h3>Current Ammount : {account.amount} </h3>
+      <h3>Total Bonus :{bonus.points} </h3>
+      <Account
+        increment={increment}
+        decrement={decrement}
+        incrementByAmount={incrementByAmount}
+        account={account} />
+      <Bonus increment={incrementBonus} bonus={bonus} />
+    </div>
   )
 }
 export default App
